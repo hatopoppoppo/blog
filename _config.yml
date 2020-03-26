@@ -21,9 +21,9 @@
 title: hato's blog
 email: hatopoppo.web@google.com
 description: >- # this means to ignore newlines until "baseurl:"
-  別にQiitaに書くほどでもないような小ネタを書くだけのブログもどき
-baseurl: "/blog/" # the subpath of your site, e.g. /blog
-url: "https://hatopoppoppo.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+  別にQiitaに書くほどでもないような小ネタを書くだけのブログもどき Qiita脱出テスト中
+baseurl: "/blog" # the subpath of your site, e.g. /blog
+url: "github.com/hatopoppoppo/hatopoppoppo.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: hatopoppo_N
 github_username:  hatopoppoppo
 
