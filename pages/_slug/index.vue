@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <h1 class="title">{{ title }}</h1>
+    <h1 class="titlee">{{ title }}</h1>
     <p class="publishedAt">{{ publishedAt }}</p>
     <div class="post" v-html="body"></div>
   </main>
