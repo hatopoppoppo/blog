@@ -33,6 +33,17 @@ ul{
   grid-template-columns: repeat(5,1fr);
   margin: 0 auto;
   gap: 30px;
+  padding: 0;
+}
+@media screen and (max-width: 1200px) {
+  ul{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 562px) {
+  ul{
+    grid-template-columns: 1fr;
+  }
 }
 li{
   list-style: none;
@@ -112,10 +123,8 @@ import axios from 'axios'
 export default {
   async asyncData() {
     const { data } = await axios.get(
-      // your-service-id部分は自分のサービスidに置き換えてください
       'https://hatopoppoblog.microcms.io/api/v1/blogs',
       {
-        // your-api-key部分は自分のapi-keyに置き換えてください
         headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY }
       }
     )
