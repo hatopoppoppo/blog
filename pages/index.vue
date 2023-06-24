@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>タイトル未定</h1>
-    <p class="intro">目的もなくただそれなりの長文を書き留めるだけの場所</p>
+    <p class="intro">日記とかを書いたりする場所</p>
     <ul>
       <li v-for="(content, index) in contents" :key="content.id" :style="{ animationDelay: 0.5 + index*0.3 + 's' }">
         <nuxt-link :to="`/${content.id}`">
