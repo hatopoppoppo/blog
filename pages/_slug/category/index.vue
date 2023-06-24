@@ -1,29 +1,14 @@
 <template>
   <main class="main">
-    <div class="head">
-      <div v-if="eyecatch">
-        <div class="eyecatch">
-          <img :src="eyecatch.url" alt="">
-        </div>
-      </div>
-      <div v-else>
-        <div class="eyecatch">
-          <img src="noimage.png" alt="">
-        </div>
-      </div>
-      <div class="title">
-        <div v-if="category">
-          <div class="category">category : <nuxt-link class="link" :to="`/category/${category.id}`">{{ category.name }}</nuxt-link></div>
-        </div>
-        <div v-else>
-          <div class="category">category : <span>無し</span></div>
-        </div>
-        <h1 class="title">{{ title }}</h1>
-        <p class="publishedAt">{{ publishedAt }}</p>
-      </div>
-    </div>
-    <div class="post" v-html="content">
-    </div>
+    <ul>
+      <li v-for="(content, index) in contents" :key="content.id" :style="{ animationDelay: 0.5 + index*0.3 + 's' }">
+        <nuxt-link :to="`/${content.id}`">
+          <div :style="{ backgroundImage: 'url(' + content.eyecatch.url + ')' , animationDelay: 0.5 + index*0.3 + 's' }">
+          </div>
+          <p>{{ content.title }}</p>
+        </nuxt-link>
+      </li>
+    </ul>
   </main>
 </template>
 
@@ -95,17 +80,19 @@ h1 {
 </style>
 <script>
 import axios from 'axios'
-
 export default {
   async asyncData({ params }) {
+    console.log(params.slug)
     const { data } = await axios.get(
-      `https://hatopoppoblog.microcms.io/api/v1/blogs/${params.slug}`,
+      `https://hatopoppoblog.microcms.io/api/v1/blogs?limit=${categoryId === undefined ? '' : `&filters=category[equals]${categoryId}`
+      }`,
       {
         headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY }
       }
     )
+    console.log("data")
     console.log(data)
     return data
-  }
+  },
 }
 </script>

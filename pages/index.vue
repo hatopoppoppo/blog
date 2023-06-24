@@ -121,14 +121,14 @@ li{
 <script>
 import axios from 'axios'
 export default {
-  async asyncData() {
+  async asyncData({ params }) {
+    const page = params.p || '1'
+    const limit = 10
     const { data } = await axios.get(
-      'https://hatopoppoblog.microcms.io/api/v1/blogs',
-      {
-        headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY }
-      }
+      'https://hatopoppoblog.microcms.io/api/v1/blogs?limit=${limit}&offset=${(page - 1) * limit}',
+      { headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY } }
     )
     return data
-  },
+  }
 }
 </script>

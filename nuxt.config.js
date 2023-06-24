@@ -41,5 +41,19 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/page/:p',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'page',
+      });
+      routes.push({
+        path: '/category/:categoryId/page/:p',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'category',
+      })
+    },
+  },
 }

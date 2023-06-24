@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<nuxt-link class="link" to="/">
-			<h1>備忘録</h1>
+			<h1>ブログ</h1>
 		</nuxt-link>
 	</header>
 </template>
