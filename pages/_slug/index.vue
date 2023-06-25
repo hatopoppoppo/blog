@@ -80,7 +80,11 @@ h1 {
     line-height: 2.25;
     font-size: 18px;
   }
-
+  ::v-deep li {
+    line-height: 2.25;
+    font-size: 18px;
+    margin: 2rem 0;
+  }
   ::v-deep img {
     width: 80%;
     margin: 0 auto;

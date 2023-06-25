@@ -63,11 +63,11 @@ h1 {
   line-height: 2.25;
   font-size: 18px;
 
-  ::v-deep p {
+  p {
     line-height: 2.25;
     font-size: 18px;
   }
-  ::v-deep li {
+  li {
     line-height: 2.25;
     font-size: 18px;
   }
