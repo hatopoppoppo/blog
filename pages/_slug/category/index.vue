@@ -60,9 +60,14 @@ h1 {
   width: 90vw;
   max-width: 820px;
   margin: 0 auto;
-  line-height: 2;
+  line-height: 2.25;
+  font-size: 18px;
 
   ::v-deep p {
+    line-height: 2.25;
+    font-size: 18px;
+  }
+  ::v-deep li {
     line-height: 2.25;
     font-size: 18px;
   }
