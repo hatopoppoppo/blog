@@ -58,11 +58,13 @@ h1 {
 
 .post {
   width: 90vw;
-  max-width: 1020px;
+  max-width: 820px;
   margin: 0 auto;
+  line-height: 2;
 
   ::v-deep p {
-    line-height: 1.5;
+    line-height: 2.25;
+    font-size: 18px;
   }
 
   ::v-deep img {

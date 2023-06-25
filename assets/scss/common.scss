@@ -1,14 +1,19 @@
 :root {
   --accent-color: #008080;
-  --base-color: #fdfdfb;
+  --base-color: ##FFFFFF;
   --text-base: 12px;
+}
+@font-face {
+  font-family: 'Noto'; // <-好きな名前をつけれます。
+  src: url('../font/NotoSansJP-VariableFont_wght.ttf') format("opentype");
 }
 body{
   background-color: var(--base-color);
   margin: 0;
-  min-height: 100vh;
+  min-height: 60vh;
   position: relative;
   box-sizing: border-box;
+  font-family: "Noto";
 }
 main{
   padding-bottom: 85px;
