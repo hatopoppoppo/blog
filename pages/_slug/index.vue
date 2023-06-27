@@ -13,7 +13,8 @@
       </div>
       <div class="title">
         <div v-if="category">
-          <div class="category">category : <nuxt-link class="link" :to="`/category/${category.id}`">{{ category.name }}</nuxt-link></div>
+          <div class="category">category : {{ category.name }}</div>
+          <!-- <div class="category">category : <nuxt-link class="link" :to="`/category/${category.id}`">{{ category.name }}</nuxt-link></div> -->
         </div>
         <div v-else>
           <div class="category">category : <span>無し</span></div>
@@ -98,7 +99,7 @@ h1 {
   }
 }
 </style>
-<!-- <script>
+<script>
 import axios from 'axios'
 
 export default {
@@ -110,20 +111,6 @@ export default {
       }
     )
     console.log(data)
-    return data
-  }
-}
-</script> -->
-<script>
-import axios from 'axios'
-export default {
-  async asyncData({ params }) {
-    const page = params.p || '1'
-    const limit = 2
-    const { data } = await axios.get(
-      `https://hatopoppoblog.microcms.io/api/v1/blog?limit=${limit}&offset=${(page - 1) * limit}`,
-      { headers: {  'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY  } }
-    )
     return data
   }
 }
