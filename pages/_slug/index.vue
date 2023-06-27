@@ -13,7 +13,7 @@
       </div>
       <div class="title">
         <div v-if="category">
-          <div class="category">category : {{ category.name }}</div>
+          <!-- <div class="category">category : {{ category.name }}</div> -->
           <div class="category">category : <nuxt-link class="link" :to="`/category/${category.id}`">{{ category.name }}</nuxt-link></div>
         </div>
         <div v-else>
