@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -11,7 +12,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '日記とかを書いたりする場所' },
+      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -54,6 +55,25 @@ export default {
         component: resolve(__dirname, 'pages/index.vue'),
         name: 'category',
       })
+    },
+  },
+  generate: {
+    async routes() {
+      const limit = 2
+      const range = (start, end) =>
+        [...Array(end - start + 1)].map((_, i) => start + i)
+
+      // 一覧のページング
+      const pages = await axios
+        .get(`https://hatopoppoblog.microcms.io/api/v1/blog?limit=0`, {
+          headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY },
+        })
+        .then((res) =>
+          range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
+            route: `/page/${p}`,
+          }))
+        )
+      return pages
     },
   },
 }

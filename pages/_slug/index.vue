@@ -98,7 +98,7 @@ h1 {
   }
 }
 </style>
-<script>
+<!-- <script>
 import axios from 'axios'
 
 export default {
@@ -110,6 +110,20 @@ export default {
       }
     )
     console.log(data)
+    return data
+  }
+}
+</script> -->
+<script>
+import axios from 'axios'
+export default {
+  async asyncData({ params }) {
+    const page = params.p || '1'
+    const limit = 2
+    const { data } = await axios.get(
+      `https://hatopoppoblog.microcms.io/api/v1/blog?limit=${limit}&offset=${(page - 1) * limit}`,
+      { headers: {  'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY  } }
+    )
     return data
   }
 }

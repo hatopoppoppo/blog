@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <main class="main">
     <ul>
       <li v-for="(content, index) in contents" :key="content.id" :style="{ animationDelay: 0.5 + index*0.3 + 's' }">
@@ -102,4 +102,4 @@ export default {
     return data
   },
 }
-</script>
+</script> -->

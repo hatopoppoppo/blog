@@ -27,5 +27,8 @@
     "jest-environment-jsdom": "^29.1.2",
     "sass": "^1.57.1",
     "vue-jest": "^3.0.4"
-  }
+  },
+  "jest": {
+    "testEnvironment": "node"
+}
 }
