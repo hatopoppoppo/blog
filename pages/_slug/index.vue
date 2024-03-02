@@ -8,12 +8,11 @@
       </div>
       <div v-else>
         <div class="eyecatch">
-          <img src="noimage.png" alt="">
+          <img src="/image/noimage.png" alt="">
         </div>
       </div>
       <div class="title">
         <div v-if="category">
-          <!-- <div class="category">category : {{ category.name }}</div> -->
           <div class="category">category : <nuxt-link class="link" :to="`/category/${category.id}`">{{ category.name }}</nuxt-link></div>
         </div>
         <div v-else>
@@ -79,11 +78,11 @@ h1 {
 
   ::v-deep p {
     line-height: 2.25;
-    font-size: 18px;
+    font-size: 16px;
   }
   ::v-deep li {
     line-height: 2.25;
-    font-size: 18px;
+    font-size: 16px;
     margin: 2rem 0;
   }
   ::v-deep img {
@@ -110,7 +109,27 @@ export default {
         headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY }
       }
     )
+    const makeTwitterLink = (str) => {
+      console.log("aaa")
+      const regexp_twitter = /https:\/\/twitter.com\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#\u3001-\u30FE\u4E00-\u9FA0\uFF01-\uFFE3]+/g;
+      var twitter_embed = function (url) {
+        console.log("embed")
+        return '<iframe border=0 frameborder=0 height=250 width=550 src="https://twitframe.com/show?url=' + url + '"></iframe>'
+      }
+      if (str.match(regexp_twitter) != null) {
+        const urlAllMatches = str.match(regexp_twitter);
+        if (urlAllMatches) {
+          const urlMatches = new Set(urlAllMatches);
+          urlMatches.forEach(url => {
+            str = str.replaceAll(url, twitter_embed(url));
+          });
+        }
+      }
+      return str;
+    }
     console.log(data)
+    data.content = await makeTwitterLink(data.content)
+    console.log("bbb")
     return data
   }
 }

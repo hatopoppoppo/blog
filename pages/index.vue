@@ -5,7 +5,11 @@
     <ul>
       <li v-for="(content, index) in contents" :key="content.id" :style="{ animationDelay: 0.5 + index*0.3 + 's' }">
         <nuxt-link :to="`/${content.id}`">
-          <div :style="{ backgroundImage: 'url(' + content.eyecatch.url + ')' , animationDelay: 0.5 + index*0.3 + 's' }">
+          <div v-if="content.eyecatch">
+            <div :style="{ backgroundImage: 'url(' + content.eyecatch.url + ')' , animationDelay: 0.5 + index*0.3 + 's' }"></div>
+          </div>
+          <div v-else>
+            <div :style="{ backgroundImage: 'url(/image/noimage.png)' , animationDelay: 0.5 + index*0.3 + 's' }"></div>
           </div>
           <p>{{ content.title }}</p>
         </nuxt-link>
@@ -93,7 +97,7 @@ li{
     text-decoration: none;
     width: 100%;
   }
-  li div{
+  li div div{
     width: calc(100% - 6px);
     border: solid 3px #000;
     aspect-ratio: 1/1;

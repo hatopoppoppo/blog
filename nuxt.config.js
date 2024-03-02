@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -54,6 +55,50 @@ export default {
         component: resolve(__dirname, 'pages/index.vue'),
         name: 'category',
       })
+    },
+  },
+  generate: {
+    async routes() {
+      const limit = 10
+      const range = (start, end) =>
+        [...Array(end - start + 1)].map((_, i) => start + i)
+
+      // 一覧のページング
+      const pages = await axios
+        .get(`https://hatopoppoblog.microcms.io/api/v1/blogs?limit=0`, {
+          headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY },
+        })
+          .then((res) =>
+            range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
+              route: `/page/${p}`,
+            }))
+          )
+
+      const categories = await axios
+        .get(`https://hatopoppoblog.microcms.io/api/v1/categories?fields=id`, {
+          headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY },
+        })
+          .then(({ data }) => {
+            return data.contents.map((content) => content.id)
+          });
+
+      // カテゴリーページのページング
+      const categoryPages = await Promise.all(
+        categories.map((category) =>
+          axios.get(
+            `https://hatopoppoblog.microcms.io/api/v1/blogs?limit=0&filters=category[equals]${category}`,
+            { headers: { 'X-MICROCMS-API-KEY': process.env.MICROCMS_KEY } }
+          )
+            .then((res) =>
+              range(1, Math.ceil(res.data.totalCount / 10)).map((p) => ({
+                route: `/category/${category}/page/${p}`,
+              })))
+      )
+      )
+
+      // 2次元配列になってるのでフラットにする
+      const flattenCategoryPages = [].concat.apply([], categoryPages)
+      return [...pages, ...flattenCategoryPages]
     },
   },
 }
